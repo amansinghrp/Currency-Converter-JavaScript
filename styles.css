@@ -15,8 +15,8 @@ body{
     background-color: #FFFFE8 ;
     padding: 2rem;
     border-radius: 1rem;
-    min-height: 45vh;
-    width: 40vh; 
+    min-height: 55vh;
+    width: 60vh; 
 }
 
 .form{
@@ -68,6 +68,12 @@ form input{
 
 .result{
     margin: 2rem 0 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    background-color: #D0CEBA;
+    border-radius: 0.75rem;
 }
 
 form button{

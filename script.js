@@ -160,7 +160,7 @@ const countryList = {
     ZWD: "ZW",
   };
 
-let BASE_URL = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/inr.json"
+let BASE_URL = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/"
 
 const dropDown = document.querySelectorAll(".dropdown select");
 const btn = document.querySelector("form button");
@@ -197,4 +197,27 @@ const updateFlag = (elmt)=>{
     let newSrc = `https://flagsapi.com/${countryCode}/flat/64.png`;
     let img = elmt.parentElement.querySelector("img");
     img.src = newSrc;
+    updateExchnageRate();
 }
+
+const updateExchnageRate = async () =>{
+    let amount = document.querySelector(".amount input");
+    let amtVal = amount.value;
+    // https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd/inr.json
+    let URL = `${BASE_URL}${fromCurr.value.toLowerCase()}/${toCurr.value.toLowerCase()}.json`
+    let response = await fetch(URL);// fetch the response form this URL
+    let data = await response.json();
+    let rate = data[toCurr.value.toLowerCase()];
+    let finalAmount = rate*amtVal;
+
+    result.innerText = `${amtVal} ${fromCurr.value} = ${finalAmount} ${toCurr.value}`;
+}
+
+btn.addEventListener("click", (evnt) =>{
+    evnt.preventDefault();
+    updateExchnageRate();
+});
+
+window.addEventListener("load", ()=>{
+    updateExchnageRate();
+});
